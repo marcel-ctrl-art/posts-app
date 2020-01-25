@@ -20,7 +20,7 @@ with open('secrets.json') as f:
 def get_secrets(setting, secrets=secrets):
     """Get the secret variable or return an explicit exception"""
     try:
-        return secrets[settings]
+        return secrets[setting]
     except KeyError:
         error_msg = f'Set the {setting} environment variable.'
         raise ImproperlyConfigured(error_msg)

@@ -1,0 +1,10 @@
+{% extends '__base__.html' %}
+{% block content %}
+{% for post in posts %}
+<section>
+  <h3>{{ post.title }}</h3>
+  <p>{{ post.text }}</p>
+</section>
+{% endfor %}
+
+{% endblock content%}

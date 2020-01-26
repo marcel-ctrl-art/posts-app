@@ -8,24 +8,38 @@
 {% endfor %}
 
 
-<div class="pagination">
-  {% if posts.has_previous %}
-    <a href="?page=1">&laquo;</a>
-    <a href="?page={{ posts.previous_page_number}}">&lsaquo;</a>
-  {% endif %}
-
-  {% for num in posts.paginator.page_range %}
-  {% if posts.number == num %}
-  <strong>{{ num }}</strong>
-  {% elif num > posts.number|add:'-1' and num < posts.number|add:'1' %}
-    {{ num }}
-  {% endif %}
-  {% endfor %}
-
-  {% if posts.has_next %}
-    <a href="?page={{ posts.next_page_number }}">&rsaquo;</a>
-    <a href="?page={{ posts.paginator.num_pages }}">&raquo;</a>
-  {% endif %}
-</div>
+<nav aria-label="Page navigation container">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      {% if posts.has_previous %}
+      <a class="page-link" href="?page=1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+    </li>
+    <li>
+      <a class="page-link" href="?page={{ posts.previous_page_number }}">&lsaquo;</a>
+      {% endif %}
+    </li>
+      {% for num in posts.paginator.page_range %}
+      {% if posts.number == num %}
+    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+      {% elif num > posts.number|add:'-1' and num < posts.number|add:'1' %}
+    <li class="page-item">{{ num }}</li>
+      {% endif %}
+      {% endfor %}
+    <li class="page-item">
+      {% if posts.has_next %}
+      <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&rsaquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li>
+      <a class="page-link" href="?page={{ posts.paginator.num_pages }}">&raquo;</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
 
 {% endblock content %}

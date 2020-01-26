@@ -1,0 +1,31 @@
+{% extends '__base__.html' %}
+
+{% block content %}
+
+{% for post in posts %}
+{{ post.title }}
+{{ post.text }}
+{% endfor %}
+
+
+<div class="pagination">
+  {% if posts.has_previous %}
+    <a href="?page=1">&laquo;</a>
+    <a href="?page={{ posts.previous_page_number}}">&lsaquo;</a>
+  {% endif %}
+
+  {% for num in posts.paginator.page_range %}
+  {% if posts.number == num %}
+  <strong>{{ num }}</strong>
+  {% elif num > posts.number|add:'-1' and num < posts.number|add:'1' %}
+    {{ num }}
+  {% endif %}
+  {% endfor %}
+
+  {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">&rsaquo;</a>
+    <a href="?page={{ posts.paginator.num_pages }}">&raquo;</a>
+  {% endif %}
+</div>
+
+{% endblock content %}

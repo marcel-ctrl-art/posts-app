@@ -19,11 +19,11 @@
     {% else %}
   {% endif %}
   {% for i in paginator.page_range %}
-  {% if page_obj_number == i %}
-  <li class="page-item active">{{ i }}</li>
-  {% else %}
-  <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-  {% endif %}
+    {% if page_obj_number == i %}
+    <li class="page-item active">{{ i }}</li>
+    {% else %}
+    <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
   {% endfor %}
   {% if page_obj.has_next %}
   <li class="page-item disabled">

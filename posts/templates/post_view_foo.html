@@ -1,0 +1,40 @@
+{% extends '__base__.html' %}
+{% block content %}
+{% for post in posts %}
+<section>
+  <h3>{{ post.title }}</h3>
+  <p>{{ post.text }}</p>
+</section>
+{% endfor %}
+
+
+<nav aria-label="Page navigation container">
+  <ul class="pagination justify-content-center">
+    {% if posts.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1" aria-label="Previous">
+        <span aria-hidden="true">&lsaquo;</span>
+      </a>
+    </li>
+<!--    <li class="page-item">-->
+<!--      <a class="page-link" href="?page={{ posts.previous_page_number }}"></a>-->
+    {% endif %}
+<!--    </li>-->
+    {% for page_num in posts.paginator.page_range %}
+    {% if posts.number == page_num %}
+    <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
+    {% else %}
+    <li class="page-item"><span class="page-link">{{ page_num }}</span></li>
+    {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+    <li class="page-item">
+      <a aria-label="Next" class="page-link" href="?page={{ posts.next_page_number }}">
+      <span>&rsaquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+
+{% endblock content %}

@@ -25,3 +25,17 @@ class PostsView(View):
         }
 
         return render(request, "posts_view.html", ctx)
+
+
+def post_view_foo(request):
+    if request.method == "GET":
+        posts = Post.objects.all().order_by("-created_at")
+        paginator = Paginator(posts, 3)
+        page = request.GET.get("page")
+        posts = paginator.get_page(page)
+
+        ctx = {
+            "posts": posts
+        }
+
+        return render(request, "post_view_foo.html", ctx)
